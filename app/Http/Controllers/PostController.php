@@ -15,8 +15,15 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = User::find(Auth()->user()->id)->posts()->paginate(5);
-        return view('admin.post.index',['posts' => $posts]);
+        $search = $request->search ? $request->search : null;
+        $perPage = $request->perPage ? $request->perPage : 5;
+        $posts = User::find(Auth()->user()->id)->posts();
+        if($search){
+            $posts->where('title','LIKE',"%$search%");
+        }
+        $posts = $posts->orderBy('id','DESC')->paginate($perPage);
+
+        return view('admin.post.index',['posts' => $posts,'search'=>$search]);
     }
 
     /**

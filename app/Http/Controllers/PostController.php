@@ -31,8 +31,9 @@ class PostController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles('manager');
         return view('admin.post.create');
     }
 

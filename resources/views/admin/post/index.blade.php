@@ -69,7 +69,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if(count($post) > 0)
+                @if(count($posts) > 0)
                     <div class="card-footer">
                         <div class="float-left">
                             @if($search)
